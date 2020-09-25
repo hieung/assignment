@@ -43,7 +43,7 @@ In this design, i choose use rabbitmq to do message queue to have advantages loo
 
 ![alt Sequence Diagram](img/bank_abc_design-seq.png)
 
-### Sequence Failover
+### Sequence Diagram - Failover
 
 ![alt Sequence Failover Diagram](img/bank_abc_design-seq_failover.png)
 
@@ -60,6 +60,8 @@ API Port
 1. external-vocher - 8889
 2. integration - 8888
 3. vocher - 8887
+
+Import project com.pycogroup.assignment to intellij and run. Remember setup queue and database (look at some images in troubleshooting)
 
 ### How to run from source code
 Checkout source code in github
@@ -100,10 +102,15 @@ Create some record fail in table vocher. Turn off 3 components and restart it.
 The system will be get all failed record and resend to recover some fail case and make it pass. 
 
 ### Docker-compose
-Go to file to view all config docker/docker-compose.yaml
-And run command by : docker-compose up -d
+N/A
 
 ### Troubleshooting
+Structure of Assignment Project
+![alt Structure Component](img/structure_component.png)
+
 Config rabbitmq in http://localhost:15672/#/exchanges (guest/guest)
 ![alt Configure Exchange Diagram](img/config_queue_add_exchange.png)
 ![alt Configure Queue Diagram](img/config_queue.png)
+
+Create database assignment
+![alt Setup DB](img/db_name.png)
