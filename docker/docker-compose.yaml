@@ -1,0 +1,86 @@
+version: '3.4'
+
+services:
+  postgres-ass:
+    container_name: postgres-ass
+    image: hieung/postgres-assignment:1.0
+    environment:
+      - POSTGRESQL_USERNAME=postgres
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_DB=assignment
+    ports:
+      - 5432:5432
+    networks:
+      - assignment
+
+  rabbitmq-ass:
+    container_name: rabbitmq-ass
+    image: hieung/rabbitmq-assignment:1.0
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - assignment
+
+  pgadmin4-epo:
+    container_name: pgadmin4-assignment
+    image: dpage/pgadmin4:latest
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=user@domain.com
+      - PGADMIN_DEFAULT_PASSWORD=SuperSecret
+    ports:
+      - 80:80
+    networks:
+      - assignment
+
+  evocher-ass:
+    container_name: evocher-ass
+    image: hieung/external-vocher:1.0
+    ports:
+      - 8889:8889      
+    networks:
+      - assignment
+ 
+  integration-ass:
+    container_name: integration-ass
+    image: hieung/integration:1.0
+    depends_on:
+      - rabbitmq-ass
+    ports:
+      - 8888:8888
+    environment:
+      - SPRING_RABBITMQ_host=rabbitmq-ass
+      - SPRING_RABBITMQ_port=5672
+      - API_EVOCHER_URL=http://evocher-ass:8889/evocher
+      - SPRING_RABBITMQ_USERNAME=guest
+      - SPRING_RABBITMQ_PASSWORD=guest
+      - EVOCHER_RABBITMQ_EXCHANGE=evocher.exchange
+      - EVOCHER_RABBITMQ_QUEUE=evocher.queue
+      - EVOCHER_RABBITMQ_ROUTINGKEY=evocher.routingkey
+    networks:
+      - assignment
+
+  vocher-ass:
+    container_name: vocher-ass
+    image: hieung/vocher:1.0
+    depends_on:
+      - postgres-ass
+    ports:
+      - 8887:8887
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-ass:5432/assignment
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=mysecretpassword
+      - SPRING_RABBITMQ_HOST=rabbitmq-ass
+      - SPRING_RABBITMQ_PORT=5672
+      - SPRING_RABBITMQ_USERNAME=guest
+      - SPRING_RABBITMQ_PASSWORD=guest
+      - VOCHER_RABBITMQ_EXCHANGE=vocher.exchange
+      - VOCHER_RABBITMQ_QUEUE=vocher.queue
+      - VOCHER_RABBITMQ_ROUTINGKEY=vocher.routingkey
+    networks:
+      - assignment
+    
+networks:
+  assignment:
+    driver: bridge

@@ -1,0 +1,60 @@
+{
+	"info": {
+		"_postman_id": "cbcd517d-6dff-495a-a8b9-376f9f5714c9",
+		"name": "bank_abc",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "evocher-api",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8889/evocher?simcard=0989123456",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8889",
+					"path": [
+						"evocher"
+					],
+					"query": [
+						{
+							"key": "simcard",
+							"value": "0989123456"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "vocher-api",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8887/vocher?simcard=0989123456",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8887",
+					"path": [
+						"vocher"
+					],
+					"query": [
+						{
+							"key": "simcard",
+							"value": "0989123456"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
