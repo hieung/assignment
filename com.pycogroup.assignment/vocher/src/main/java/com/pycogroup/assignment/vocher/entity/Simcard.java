@@ -23,7 +23,4 @@ public class Simcard {
     @Column(name = "simcard", unique = true)
     private String simcard;
 
-//    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "simcard")
-//    private List<Vocher> vocherList;
-
 }

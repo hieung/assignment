@@ -48,14 +48,16 @@ public class VocherServiceImpl implements VocherService {
 
     @Override
     public Vocher createVocher(String simcard) {
-        Vocher vocher = new Vocher();
-        VocherPk vocherPk = new VocherPk();
-        vocherPk.setSimcard(simcard);
         Timestamp currentTimestamp = Timestamp.from(Instant.now().truncatedTo(ChronoUnit.SECONDS));
-        vocherPk.setCreatedDate(currentTimestamp);
-        vocher.setVocherPk(vocherPk);
-        vocher.setActionDate(currentTimestamp);
-        vocher.setStatus("Send");
+        VocherPk vocherPk = VocherPk.builder()
+                .simcard(simcard)
+                .createdDate(currentTimestamp)
+                .build();
+        Vocher vocher = Vocher.builder()
+                .vocherPk(vocherPk)
+                .actionDate(currentTimestamp)
+                .status("Send")
+                .build();
         vocherRepository.save(vocher);
         return vocher;
     }

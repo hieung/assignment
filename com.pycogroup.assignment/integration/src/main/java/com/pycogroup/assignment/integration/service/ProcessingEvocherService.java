@@ -47,12 +47,14 @@ public class ProcessingEvocherService {
             return new ResponseEntity<>(evocherJSON, HttpStatus.CREATED);
 
         } catch (Exception e) {
-            EvocherJSON evocherJSONFail = new EvocherJSON();
-            evocherJSONFail.setSimcard(vocher.getVocherPk().getSimcard());
-            evocherJSONFail.setDateCreated(vocher.getVocherPk().getCreatedDate());
-            evocherJSONFail.setEvocher(null);
-            evocherJSONFail.setStatus("Failed");
-            evocherJSONFail.setActionDate(Timestamp.from(Instant.now()));
+            EvocherJSON evocherJSONFail = EvocherJSON.builder()
+                    .actionDate(Timestamp.from(Instant.now()))
+                    .simcard(vocher.getVocherPk().getSimcard())
+                    .dateCreated(vocher.getVocherPk().getCreatedDate())
+                    .status("Failed")
+                    .evocher(null)
+                    .build();
+
             System.out.println("Evocher could not be created - Fail " + evocherJSONFail.toString());
             System.out.println("Push failed evocher to queue");
             rabbitMQSender.send(evocherJSONFail);

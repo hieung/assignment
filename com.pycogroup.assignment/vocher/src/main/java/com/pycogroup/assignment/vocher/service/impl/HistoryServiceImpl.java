@@ -20,10 +20,12 @@ public class HistoryServiceImpl implements HistoryService {
 
     @Override
     public void createHistory(Vocher vocher) {
-        History history = new History();
-        history.setStatus(vocher.getStatus());
-        history.setInteractionDate(vocher.getActionDate());
-        history.setSimcard(vocher.getVocherPk().getSimcard());
+        History history = History.builder()
+                .status(vocher.getStatus())
+                .interactionDate(vocher.getActionDate())
+                .simcard(vocher.getVocherPk().getSimcard())
+                .build();
+
         historyRepository.save(history);
     }
 }
