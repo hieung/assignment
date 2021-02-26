@@ -27,7 +27,8 @@ public class ProcessingFailedVocher {
     @Scheduled(cron = "10 * * * * *")
     public void resubmitFailedVocher() {
         System.out.println("Scheduler CRONJOB 10s -----");
-        List<Vocher> vocherLs = vocherRepository.findFailedVocher();
+//        List<Vocher> vocherLs = vocherRepository.findFailedVocher();
+        List<Vocher> vocherLs = vocherRepository.findByStatus("Failed");
         for (Vocher vocher : vocherLs) {
             vocher.setStatus("Send");
             vocher.setActionDate(Timestamp.from(Instant.now()));

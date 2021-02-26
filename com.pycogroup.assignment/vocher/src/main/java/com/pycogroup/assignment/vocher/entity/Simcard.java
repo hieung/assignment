@@ -1,9 +1,18 @@
 package com.pycogroup.assignment.vocher.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "simcard")
+@Getter
+@Setter
+@NoArgsConstructor
+@Builder
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class Simcard {
 
     @Id
@@ -17,35 +26,4 @@ public class Simcard {
 //    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "simcard")
 //    private List<Vocher> vocherList;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getSimcard() {
-        return simcard;
-    }
-
-    public void setSimcard(String simcard) {
-        this.simcard = simcard;
-    }
-
-//    public List<Vocher> getVocherList() {
-//        return vocherList;
-//    }
-//
-//    public void setVocherList(List<Vocher> vocherList) {
-//        this.vocherList = vocherList;
-//    }
-
-    @Override
-    public String toString() {
-        return "Simcard{" +
-                "id=" + id +
-                ", simcard='" + simcard + '\'' +
-                '}';
-    }
 }
