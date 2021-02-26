@@ -1,0 +1,99 @@
+{
+    "rabbit_version": "3.8.8",
+    "rabbitmq_version": "3.8.8",
+    "product_name": "RabbitMQ",
+    "product_version": "3.8.8",
+    "users": [
+        {
+            "name": "guest",
+            "password_hash": "akDEV2u1NLNOxs6aK6g+25aOd71xzRGRhmMZeQV46dP9q66P",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": "administrator"
+        }
+    ],
+    "vhosts": [
+        {
+            "name": "/"
+        }
+    ],
+    "permissions": [
+        {
+            "user": "guest",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        }
+    ],
+    "topic_permissions": [],
+    "parameters": [],
+    "global_parameters": [
+        {
+            "name": "cluster_name",
+            "value": "rabbit@my-rabbit"
+        },
+        {
+            "name": "internal_cluster_id",
+            "value": "rabbitmq-cluster-id-zpBxO8nSKqokthZtLQMHuA"
+        }
+    ],
+    "policies": [],
+    "queues": [
+        {
+            "name": "evocher.queue",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-queue-type": "classic"
+            }
+        },
+        {
+            "name": "vocher.queue",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-queue-type": "classic"
+            }
+        }
+    ],
+    "exchanges": [
+        {
+            "name": "vocher.exchange",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "evocher.exchange",
+            "vhost": "/",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        }
+    ],
+    "bindings": [
+        {
+            "source": "evocher.exchange",
+            "vhost": "/",
+            "destination": "evocher.queue",
+            "destination_type": "queue",
+            "routing_key": "evocher.routingkey",
+            "arguments": {}
+        },
+        {
+            "source": "vocher.exchange",
+            "vhost": "/",
+            "destination": "vocher.queue",
+            "destination_type": "queue",
+            "routing_key": "vocher.routingkey",
+            "arguments": {}
+        }
+    ]
+}

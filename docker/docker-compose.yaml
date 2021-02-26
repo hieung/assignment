@@ -22,36 +22,25 @@ services:
     networks:
       - assignment
 
-  pgadmin4-epo:
-    container_name: pgadmin4-assignment
-    image: dpage/pgadmin4:latest
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=user@domain.com
-      - PGADMIN_DEFAULT_PASSWORD=SuperSecret
-    ports:
-      - 80:80
-    networks:
-      - assignment
-
-  evocher-ass:
-    container_name: evocher-ass
+  evocher-app:
+    container_name: evocher-app
     image: hieung/external-vocher:1.0
     ports:
-      - 8889:8889      
+      - 8889:8889
     networks:
       - assignment
  
-  integration-ass:
-    container_name: integration-ass
+  integration-app:
+    container_name: integration-app
     image: hieung/integration:1.0
     depends_on:
       - rabbitmq-ass
     ports:
       - 8888:8888
     environment:
-      - SPRING_RABBITMQ_host=rabbitmq-ass
-      - SPRING_RABBITMQ_port=5672
-      - API_EVOCHER_URL=http://evocher-ass:8889/evocher
+      - SPRING_RABBITMQ_HOST=rabbitmq-ass
+      - SPRING_RABBITMQ_PORT=5672
+      - API_EVOCHER_URL=http://evocher-app:8889/evocher
       - SPRING_RABBITMQ_USERNAME=guest
       - SPRING_RABBITMQ_PASSWORD=guest
       - EVOCHER_RABBITMQ_EXCHANGE=evocher.exchange
@@ -60,11 +49,12 @@ services:
     networks:
       - assignment
 
-  vocher-ass:
-    container_name: vocher-ass
+  vocher-app:
+    container_name: vocher-app
     image: hieung/vocher:1.0
     depends_on:
       - postgres-ass
+      - rabbitmq-ass
     ports:
       - 8887:8887
     environment:

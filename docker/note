@@ -1,0 +1,16 @@
+#VOCHER-APP
+docker build -t hieung/vocher:1.0 .
+
+#EXTERNAL-VOCHER-APP
+docker build -t hieung/external-vocher:1.0 .
+
+#INTEGRATION-APP
+docker build -t hieung/integration:1.0 .
+
+#POSTGRES
+docker build -t hieung/postgres-assignment:1.0 .
+docker run --name postgres-assignment -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d hieung/postgres-assignment:1.0
+
+#RABBITMQ
+docker build -t hieung/rabbitmq-assignment:1.0 .
+docker run -d --hostname $CONTAINER --name $CONTAINER -p 15672:15672 -e RABBITMQ_ERLANG_COOKIE='example secret' hieung/rabbitmq-assignment:1.0
