@@ -23,7 +23,7 @@ public class EVocherService {
         System.out.println("Simcard Number: "+simcard);
         int no = Integer.parseInt(number);
 
-        if (no < 2) {
+        if (no < 5) {
             System.out.println("Create Evocher Successfully: " + generatedString);
             EvocherJSON evocher = new EvocherJSON(generatedString, simcard, Timestamp.from(Instant.now()));
             evocher.setEvocher(generatedString);

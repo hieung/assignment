@@ -7,9 +7,10 @@ import java.sql.Timestamp;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
+@Builder
 public class EvocherJSON implements Serializable {
 
     String evocher;

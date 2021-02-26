@@ -24,7 +24,7 @@ public class ProcessingFailedVocher {
     @Autowired
     RabbitMQSender rabbitMQSender;
 
-    @Scheduled(cron = "10 * * * * *")
+    @Scheduled(cron = "3 * * * * *")
     public void resubmitFailedVocher() {
         System.out.println("Scheduler CRONJOB 10s -----");
 //        List<Vocher> vocherLs = vocherRepository.findFailedVocher();

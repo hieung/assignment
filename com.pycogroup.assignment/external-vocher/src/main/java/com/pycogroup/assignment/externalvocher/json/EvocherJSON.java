@@ -10,7 +10,6 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @ToString
 public class EvocherJSON {
-
     String evocher;
     String simcard;
     Timestamp actionDate;
