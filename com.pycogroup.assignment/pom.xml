@@ -28,6 +28,11 @@
             <artifactId>integration</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.pycogroup.assignment</groupId>
+            <artifactId>scheduler</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -35,6 +40,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.8.1</version>
             </plugin>
         </plugins>
     </build>

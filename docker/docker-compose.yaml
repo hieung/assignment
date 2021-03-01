@@ -71,6 +71,14 @@ services:
     networks:
       - assignment
     
+  scheduler-app:
+    container_name: scheduler-app
+    image: hieung/scheduler:1.0
+    ports:
+      - 8886:8886
+    networks:
+      - assignment
+
 networks:
   assignment:
     driver: bridge

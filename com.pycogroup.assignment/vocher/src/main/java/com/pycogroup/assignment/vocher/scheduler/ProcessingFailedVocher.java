@@ -27,13 +27,13 @@ public class ProcessingFailedVocher {
     @Scheduled(cron = "3 * * * * *")
     public void resubmitFailedVocher() {
         System.out.println("Scheduler CRONJOB 10s -----");
-//        List<Vocher> vocherLs = vocherRepository.findFailedVocher();
         List<Vocher> vocherLs = vocherRepository.findByStatus("Failed");
-        for (Vocher vocher : vocherLs) {
+
+        vocherLs.stream().forEach(vocher -> {
             vocher.setStatus("Send");
             vocher.setActionDate(Timestamp.from(Instant.now()));
             rabbitMQSender.send(vocher);
             historyService.createHistory(vocher);
-        }
+        });
     }
 }

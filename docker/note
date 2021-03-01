@@ -1,6 +1,9 @@
 #VOCHER-APP
 docker build -t hieung/vocher:1.0 .
 
+#SCHEDULER-APP
+docker build -t hieung/scheduler:1.0 .
+
 #EXTERNAL-VOCHER-APP
 docker build -t hieung/external-vocher:1.0 .
 
